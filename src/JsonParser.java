@@ -9,9 +9,9 @@ import java.util.*;
  */
 public class JsonParser {
     private static final JSONParser jsonParser = new JSONParser();
-    private static final String semiFianl = "ITM62";
-    private static final String place3 = "ITM63";
-    private static final String final1 = "ITM64";
+    private static final String semiFianl = "IMT62";
+    private static final String place3 = "IMT63";
+    private static final String final1 = "IMT64";
 
     private static final Map<String, String> catMap = new HashMap<String, String>();
     private static List<String> gameList = new ArrayList<String>();
@@ -21,11 +21,12 @@ public class JsonParser {
         catMap.put("15", "2");
         catMap.put("16", "3");
         catMap.put("17", "4");
-        gameList = Arrays.asList();
+        gameList = Arrays.asList(semiFianl,place3,final1);
     }
 
 
     public static void parseJson(String json) throws Exception {
+
         Object obj = jsonParser.parse(json);
 
         JSONObject jsonObject = (JSONObject) obj;
@@ -38,18 +39,19 @@ public class JsonParser {
             String playNumber = (String) item.get("p");
             String category = String.valueOf(item.get("c"));
             String available = String.valueOf(item.get("a"));
-
             boolean av = Integer.valueOf(available) > 0;
-            if (av && gameList.contains(category)) {
+            if (av && gameList.contains(playNumber)) {
+                Date date = new Date(System.currentTimeMillis());
+                System.out.println(date);
                 print(playNumber,category,available);
-            } else {
+            } //else {
                 //System.out.println("No avaliable tickcets");
-            }
+            //}
         }
     }
 
     private static void print(String playNumber, String category, String available) {
-        category = catMap.get(category);
+        if((category = catMap.get(category))!=null) {
         if (playNumber.equals(semiFianl)) {
             System.out.println("Полуфинал - категория " + category + " количество " + available);
         } else if (playNumber.equals(place3)) {
@@ -57,6 +59,7 @@ public class JsonParser {
         } else if (playNumber.equals(final1)) {
             System.out.println("Финал - категория " + category + " количество " + available);
         }
+    }
     }
 }
 
