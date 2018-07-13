@@ -14,6 +14,9 @@ public class JsonParser {
     private static final Map<String, String> catMap = new HashMap<String, String>();
     private static List<String> gameList = new ArrayList<String>();
 
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+
     static {
         catMap.put("14", "1");
         catMap.put("15", "2");
@@ -40,24 +43,25 @@ public class JsonParser {
             String available = String.valueOf(item.get("a"));
             boolean av = Integer.valueOf(available) > 0;
             if (av && gameList.contains(playNumber)) {
-                Date date = new Date(System.currentTimeMillis());
-                System.out.println(date);
                 print(playNumber, category, available);
             }
         }
     }
 
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-
     private static void print(String playNumber, String category, String available) {
         if ((category = catMap.get(category)) != null) {
             if (playNumber.equals(final1)) {
+                printDate();
                 System.out.println(ANSI_GREEN + "Финал - категория " + category + " количество " + available);
             } /*else if (playNumber.equals(semiFinal)) {
                 System.out.println(ANSI_RED + "3 место - категория " + category + " количество " + available);
             }*/
         }
+    }
+
+    private static void printDate() {
+        Date date = new Date(System.currentTimeMillis());
+        System.out.println(date);
     }
 }
 
