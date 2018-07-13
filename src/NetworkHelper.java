@@ -27,5 +27,4 @@ private static  final  String avalUrl = "https://tickets.fifa.com/API/WCachedL1/
 
         JsonParser.parseJson(sb.toString());
     }
-
 }

@@ -9,10 +9,8 @@ import java.util.*;
  */
 public class JsonParser {
     private static final JSONParser jsonParser = new JSONParser();
-    private static final String semiFianl = "IMT62";
-    private static final String place3 = "IMT63";
+    private static final String semiFinal = "IMT63";
     private static final String final1 = "IMT64";
-
     private static final Map<String, String> catMap = new HashMap<String, String>();
     private static List<String> gameList = new ArrayList<String>();
 
@@ -21,7 +19,8 @@ public class JsonParser {
         catMap.put("15", "2");
         catMap.put("16", "3");
         catMap.put("17", "4");
-        gameList = Arrays.asList(semiFianl,place3,final1);
+        catMap.put("18", "5");
+        gameList = Arrays.asList(semiFinal, final1);
     }
 
 
@@ -43,23 +42,22 @@ public class JsonParser {
             if (av && gameList.contains(playNumber)) {
                 Date date = new Date(System.currentTimeMillis());
                 System.out.println(date);
-                print(playNumber,category,available);
-            } //else {
-                //System.out.println("No avaliable tickcets");
-            //}
+                print(playNumber, category, available);
+            }
         }
     }
 
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+
     private static void print(String playNumber, String category, String available) {
-        if((category = catMap.get(category))!=null) {
-        if (playNumber.equals(semiFianl)) {
-            System.out.println("Полуфинал - категория " + category + " количество " + available);
-        } else if (playNumber.equals(place3)) {
-            System.out.println("Матч за 3 - категория " + category + " количество " + available);
-        } else if (playNumber.equals(final1)) {
-            System.out.println("Финал - категория " + category + " количество " + available);
+        if ((category = catMap.get(category)) != null) {
+            if (playNumber.equals(final1)) {
+                System.out.println(ANSI_GREEN + "Финал - категория " + category + " количество " + available);
+            } /*else if (playNumber.equals(semiFinal)) {
+                System.out.println(ANSI_RED + "3 место - категория " + category + " количество " + available);
+            }*/
         }
-    }
     }
 }
 
