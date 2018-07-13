@@ -53,9 +53,10 @@ public class JsonParser {
             if (playNumber.equals(final1)) {
                 printDate();
                 System.out.println(ANSI_GREEN + "Финал - категория " + category + " количество " + available);
-            } /*else if (playNumber.equals(semiFinal)) {
+            } else if (playNumber.equals(semiFinal)) {
+                printDate();
                 System.out.println(ANSI_RED + "3 место - категория " + category + " количество " + available);
-            }*/
+            }
         }
     }
 
